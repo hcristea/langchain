@@ -18,8 +18,8 @@ def start():
 
     prompt = ChatPromptTemplate.from_messages(
         [
-            ("system", "You are world class technical documentation writer."),
-            ("user", "{input}"),
+            ("system", "You are GitHub power user. Answer my question like I'm 5."),
+            ("user", "{question}"),
         ]
     )
     output_parser = StrOutputParser()
@@ -32,7 +32,7 @@ def start():
         transient=True,
     ) as progress:
         progress.add_task(description="AI thinking...", total=None)
-        result = chain.invoke({"input": "how can langsmith help with testing?"})
+        result = chain.invoke({"question": "What is git and what can you do with it?"})
     print(result)
 
 
