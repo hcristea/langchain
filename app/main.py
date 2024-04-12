@@ -1,20 +1,26 @@
 import typer
+import chains
+import prompts
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
-app = typer.Typer()
 
 load_dotenv()
 
+app = typer.Typer()
+app.add_typer(chains.app, name="chains")
+app.add_typer(prompts.app, name="prompts")
+
 
 @app.command()
-def start():
+def quickstart():
     llm = ChatOpenAI()
-    # result = llm.invoke("how can langsmith help with testing?")
+    # result = llm.invoke("What is git and what can you do with it?")
     # print(result)
+    # return
 
     prompt = ChatPromptTemplate.from_messages(
         [
@@ -34,11 +40,6 @@ def start():
         progress.add_task(description="AI thinking...", total=None)
         result = chain.invoke({"question": "What is git and what can you do with it?"})
     print(result)
-
-
-@app.command()
-def hello(name: str, lastname: str = ""):
-    print(f"Hello {name} {lastname}")
 
 
 if __name__ == "__main__":
