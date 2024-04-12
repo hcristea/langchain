@@ -1,11 +1,13 @@
 import typer
 import chains
 import prompts
+
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from rich.progress import Progress, SpinnerColumn, TextColumn
+from utils import get_loading_message
 
 
 load_dotenv()
@@ -17,7 +19,7 @@ app.add_typer(prompts.app, name="prompts")
 
 @app.command()
 def quickstart():
-    llm = ChatOpenAI()
+    llm = ChatOpenAI(model="gpt-3.5-turbo")
     # result = llm.invoke("What is git and what can you do with it?")
     # print(result)
     # return
@@ -25,6 +27,7 @@ def quickstart():
     prompt = ChatPromptTemplate.from_messages(
         [
             ("system", "You are GitHub power user. Answer my question like I'm 5."),
+            # ("system", "You are GitHub power user. Answer my question like I'm an 90 years old grandma."),
             ("user", "{question}"),
         ]
     )
@@ -37,7 +40,7 @@ def quickstart():
         TextColumn("[progress.description]{task.description}"),
         transient=True,
     ) as progress:
-        progress.add_task(description="AI thinking...", total=None)
+        progress.add_task(description=get_loading_message(), total=None)
         result = chain.invoke({"question": "What is git and what can you do with it?"})
     print(result)
 
