@@ -7,7 +7,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from rich.progress import Progress, SpinnerColumn, TextColumn
-from utils import get_loading_message
+from utils import loading_message
 
 
 load_dotenv()
@@ -19,7 +19,7 @@ app.add_typer(prompts.app, name="prompts")
 
 @app.command()
 def quickstart():
-    llm = ChatOpenAI(model="gpt-3.5-turbo")
+    llm = ChatOpenAI(model="gpt-4-turbo")
     # result = llm.invoke("What is git and what can you do with it?")
     # print(result)
     # return
@@ -37,11 +37,11 @@ def quickstart():
 
     with Progress(
         SpinnerColumn(),
-        TextColumn("[progress.description]{task.description}"),
+        TextColumn("[progress.description] {task.description}"),
         transient=True,
     ) as progress:
-        progress.add_task(description=get_loading_message(), total=None)
-        result = chain.invoke({"question": "What is git and what can you do with it?"})
+        progress.add_task(description=loading_message(), total=None)
+        result = chain.invoke({"question": "What are git hub actions and what can you do with it?"})
     print(result)
 
 

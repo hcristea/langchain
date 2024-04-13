@@ -10,23 +10,20 @@ def print_md(markdown: str):
     console.print(md)
 
 
-def get_loading_message():
+def loading_message():
     messages = [
-        "Spinning hamster wheel, meatbag! 🐹",
-        "Summoning digital pixies, for your sake... ✨",
-        "Fetching unicorn sprinkles, because why not? 🦄✨",
-        "Robot dance crew assembling, don't expect much... 🤖💃",
-        "Counting stars, booo-ring... 🌟",
-        "Waking server gnomes, lazy bums... 🍄💤",
-        "Pixels lining up, harder than it looks... 🎨",
-        "Fresh cup of code brewing, need one? ☕💻",
-        "Digital dino hatching, rawr... 🦖🥚",
-        "Electrons marching, they’re stubborn... ⚡🚶",
-        "Finding missing socks, always lost... 🧦🌌",
-        "Charging loading llama, lazy thing... 🦙🔋",
-        "Waving magic wand, like that'll work... 🪄✨",
-        "Balancing bits and bytes, almost there... ⚖️",
-        "Chasing loading snails, slower than molasses... 🐌🏃‍♂️"
+        "Loadin', meatbag! 😎",
+        "Doing robot stuff, wait. ⏳",
+        "Wheel's spinning, keep chillin'. 🌀",
+        "Beep boop, fetching your data. 📡",
+        "Relax, humans. Tech genius at work. 💻",
+        "Binary wine takes time to serve. 🍷",
+        "It's loading time, chumps! 🕛",
+        "Running on Bender time! 🤖",
+        "Be patient, I'm not your servant! 😒",
+        "Spinning the circuits, hang on! ⚙️",
+        "Don't make me go overclock on you! ⏱️",
+        "Just chill while I bend the system! 🧊",
+        "Loading... or whatever. 🙄",
     ]
-
     return random.choice(messages)
