@@ -1,14 +1,24 @@
 import random
 
+from langchain_community.callbacks import get_openai_callback
+from rich import print as rich_print
 from rich.console import Console
 from rich.markdown import Markdown
+from rich.panel import Panel
 from rich.progress import Progress, SpinnerColumn, TextColumn
+from rich.syntax import Syntax
 
 
 def print_md(markdown: str):
     console = Console()
     md = Markdown(markdown)
     console.print(md)
+
+
+def print_code(code: str, lexer: str = "python"):
+    console = Console()
+    syntax = Syntax(code, lexer)
+    console.print(syntax)
 
 
 def loading_message():
@@ -30,20 +40,25 @@ def loading_message():
     return random.choice(messages)
 
 
-def invoke_w_spinner(llm, query, print_cost: bool = True):
+def print_cost(token_usage_dict):
+    if token_usage_dict:
+        print(
+            "Spent a total of {total_tokens} tokens. "
+            "(completion: {completion_tokens}, prompt: {prompt_tokens})".format(**token_usage_dict)
+        )
+
+
+def invoke_w_spinner(llm, query, show_cost: bool = True):
     with Progress(
         SpinnerColumn(),
         TextColumn("[progress.description] {task.description}"),
         transient=True,
     ) as progress:
         progress.add_task(description=loading_message(), total=None)
-        result = llm.invoke(query)
-    if print_cost:
-        token_usage = result.response_metadata.get("token_usage")
-        print(
-            "Spent a total of {total_tokens} tokens. "
-            "(completion: {completion_tokens}, prompt: {prompt_tokens})".format(**token_usage)
-        )
+        with get_openai_callback() as callback:
+            result = llm.invoke(query)
+    if show_cost:
+        rich_print(Panel(str(callback)))
     return result
 
 

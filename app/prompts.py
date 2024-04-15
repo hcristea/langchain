@@ -109,8 +109,8 @@ AI: """
 
     # now create the few shot prompt template
     few_shot_prompt_template = FewShotPromptTemplate(
-        examples=examples,
-        # example_selector=example_selector,
+        # examples=examples,
+        example_selector=example_selector,
         example_prompt=example_prompt,
         prefix=prefix,
         suffix=suffix,
