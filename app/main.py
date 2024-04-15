@@ -19,7 +19,7 @@ app.add_typer(prompts.app, name="prompts")
 
 @app.command()
 def quickstart():
-    llm = ChatOpenAI(model="gpt-4-turbo")
+    llm = ChatOpenAI(model="gpt-3.5-turbo")
     # result = llm.invoke("What is git and what can you do with it?")
     # print(result)
     # return

@@ -27,3 +27,7 @@ def loading_message():
         "Loading... or whatever. 🙄",
     ]
     return random.choice(messages)
+
+
+def count_tokens(chain, query):
+    pass
