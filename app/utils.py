@@ -17,7 +17,7 @@ def print_md(markdown: str):
 
 def print_code(code: str, lexer: str = "python"):
     console = Console()
-    syntax = Syntax(code, lexer)
+    syntax = Syntax(code, lexer, line_numbers=True)
     console.print(syntax)
 
 
